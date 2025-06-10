@@ -1,0 +1,39 @@
+{
+    "D1": ["Mojito", 85],
+    "D2": ["Mai Tai", 83],
+    "D3": ["Orange Blossom", 80],
+
+    "C1": ["Berry Frost", 74],
+    "C2": ["Pink Lady", 78],
+    "C3": ["Queen Bee", 68],
+
+    "B1": ["Heineken", 43],
+    "B2": ["Corona", 43],
+    "B3": ["Hunters Dry", 36],
+    "B4": ["Savannah", 38],
+
+
+    "S1": ["Coca Cola", 25],
+    "S2": ["Appletiser Red/Apple", 30],
+    "S3": ["Juice [Orange/Mango/Apple]", 20],
+
+    "H1": ["Hot Chocolate", 39],
+    "H2": ["Cappuccino", 42],
+    "H3": ["Americano", 40],
+
+    "F1": ["Chicken Burger", 95],
+    "F2": ["Beef Burger", 100],
+    "F3": ["Lamb Sliders", 85],
+
+    "BR1": ["Salmon Bagel", 80],
+    "BR2": ["Chocolate Croissant", 62],
+    "BR3": ["Peanut Butter & Jam", 30],
+
+    "SW1": ["Ham & Cheese Sandwich", 40],
+    "SW2": ["Tuna Sandwich", 45],
+    "SW3": ["Bacon Egg & Cheese", 50],
+
+    "DS1": ["Black Forest Cake", 65],
+    "DS2": ["Red Velvet", 62],
+    "DS3": ["Assorted Cupcakes", 60]
+}
