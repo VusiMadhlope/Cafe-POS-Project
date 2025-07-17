@@ -1,7 +1,7 @@
 #Flow -> Featues 
 #   Flow
 # - Welcome -> Check Menu and choose preferred items -> Place Order -> Taken to payments section (cash or card) -> user iniates payment (successful or decline) ->
-# - if successful: payment accepted and user gets reciept with details. Else: Declined Try again (loops till payment is accpeted) -> Goodbye message, End program. 
+# - if successful: payment accepted and user gets reciept with details. Else: Declined Try again (loops till payment is accepted) -> Goodbye message, End program. 
 #   
 #   Features
 #   - Select items from menu. Dictionary functionality and show via popup
@@ -21,7 +21,7 @@ def Home_run_menu(menu):
     print("============================================================")
     print(" HOME RUN CAFE Menu ")
     print("============================================================")
-    for code, (name, price) in menu.item():
+    for code, (name, price) in menu.items():
         print(f"{code}: {name} - R{price}")
 
 def order():
@@ -41,7 +41,7 @@ def order():
             
     return order_items
 
-def payment(total):
+def payment(order_items):
     #payment functionality for the cafe
     vat = 0.15
     subtotal = 0
@@ -49,7 +49,7 @@ def payment(total):
     
     print("============================================================")
     print(" HOME RUN CAFE PAYMENT SECTION ")
-    user = print("Select your payment option below \n1: Cash \n2: Card \n3: Tap Payment \n4: Scan to pay")
+    print("============================================================")
     print("")
 
     #calculatin subtotal
@@ -58,7 +58,7 @@ def payment(total):
             name, price = menu[item]
             subtotal += price
         else:
-            print(f"Item {item} does not exist in the menu.")
+            print(f"Item {item} is not found in the menu.")
 
     #adding in the VAT calculation
     vat = subtotal * vat
@@ -68,41 +68,34 @@ def payment(total):
     print(f"Vat: R{vat:.2f}")
     print(f"Total: R{total:.2f}")
 
-    #Payment method 
+    # Choose Payment method 
     while True:
-        try: 
-            print("Select your payment option below \n1: Cash \n2: Card \n3: Tap Payment \n4: Scan to pay")
-            print("")
-            user ("Enter your payment option: ")
+        print("Select your payment method: \n1: Cash \n2:Card \n3: Tap payment \n4: Scan to pay ")
+        payment_input = input("Enter your choice of payment: ")
 
-            if user.isdigit():
-                user = int(user)
-                if user in [1,2,3,4]:
-                    method = ["Cash", "Card", "Tap Payment", "Scan to pay"][user - 1]
-                    print(f" {method} has been selected.")
+        if payment_input.isdigit() and int(payment_input) in [1,2,3,4]:
+            method = ["Cash", "Cash", "Tap Payment", "Scan to pay"][int(payment_input) - 1]
+            print(f"{method} selected.")
+            break
 
-                    while True:
-                        user_amount = input(f"Enter your amount: ")
-                        if user_amount.isdigit():
-                            user_paid = int(user_amount)
-                            if user_paid >= total:
-                                change = user_paid - total
-                                print("Payment Successful")
-                                if change > 0:
-                                    print(f"Change is: R{change:.2f}")
-                                return total
-                            else:
-                                print("Payment has been declined Try again")
-                        else:
-                            print("Invalid Amount. Enter a valid amount")
-                else:
-                    print("Invalid Payment option. Please select from options above")
+        else:
+            print("Inavlid selection. Please choose from options above.")
+
+    #Accept payment loop
+    while True:
+        amount_input = input("Enter amount to pay.  R")
+        try:
+            amount_input = float(amount_input)
+            if amount_input >= total:
+                change = amount_input - total
+                print("Payment Accepted")
+                if change > 0:
+                    print(f"Your change is R{change:.2f}")
+                return subtotal, vat, total # returns amounts from receipt
             else:
-                print("Enter numbers only please")
-        
+                print("Payment Declined. Try Again.")
         except ValueError:
-            print("Invalid input. Please Try Again.")
-
+            print("Invalid amount. Please enter a number.")
 
 def receipt(order_items, menu,subtotal, total, vat):
     print("============================================================")
@@ -147,7 +140,7 @@ def main():
             print("=====================================")
             print("WELCOME TO HOME RUN CAFE")
             print("***  See Below   ***")
-            print("\n 1. Drinks Menu" \
+            print("\n 1. Menu" \
             "\n 2. Your Order"
             "\n 3. Payments Sections"
             "\n 4. Your Receipt"
